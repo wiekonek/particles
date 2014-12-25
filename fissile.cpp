@@ -5,8 +5,8 @@ using world_of_particles::Position;
 using world_of_particles::Direction;
 
 
-Fissile::Fissile(string name, Position* position, Direction* direction, double r, double m):
-  Normal(name, position, direction, r, m) {
+Fissile::Fissile(MultiVal* max, string name, Position* position, Direction* direction, double r, double m):
+  Normal(max, name, position, direction, r, m) {
 }
 
 void Fissile::draw() {
@@ -14,3 +14,6 @@ void Fissile::draw() {
   std::cout<<"\t"<<m<<"\n";
 }
 
+void Fissile::save() {
+  Particle::save("FI", m);
+}

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cstdlib>
+#include <fstream>
 
 #include "namegen.h"
 #include "particle.h"
@@ -12,17 +13,23 @@
 #include "fissile.h"
 #include "dualfissile.h"
 
+using std::ofstream;
+
 namespace world_of_particles {
   class Simulator {
   private:
+    ofstream file;
     NameGen *gen;
     vector<Particle*> particles;
     int p_num, itterations;
-    MultiVal size;
+    MultiVal *size;
     void init(auto&);
+    void go();
+    void save(int);
+    void show();
   public:
     Simulator(int, int, int, int);
-    void show();
+    void run_simulation();
     ~Simulator();
   };
 }

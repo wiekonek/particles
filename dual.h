@@ -8,8 +8,9 @@
 namespace world_of_particles {
   class Dual : public Normal {
   public:
-    Dual(std::string, Position*, Direction*, double, double);
+    Dual(MultiVal*, string, Position*, Direction*, double, double);
     void draw();
+    void save();
   };
 }
 

@@ -7,8 +7,8 @@
 
 #include "simulator.h"
 
-#define HEIGHT 640
-#define WIDTH 480
+#define HEIGHT 480
+#define WIDTH 640
 
 using std::cout;
 using world_of_particles::Simulator;
@@ -17,8 +17,8 @@ using world_of_particles::Simulator;
 int main(int argc, char* argv[]) {
   srand( std::time( NULL ) );
   
-  Simulator *simulator = new Simulator(WIDTH, HEIGHT, 25, 100);
-  simulator->show();
+  Simulator *simulator = new Simulator(WIDTH, HEIGHT, 4, 10);
+  simulator->run_simulation();
   
   return 0;
 }

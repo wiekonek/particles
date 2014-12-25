@@ -8,8 +8,9 @@
 namespace world_of_particles {
   class Fissile : public Normal {
   public:
-    Fissile(std::string, Position*, Direction*, double, double);
+    Fissile(MultiVal*, string, Position*, Direction*, double, double);
     void draw();
+    void save();
   };
 }
 

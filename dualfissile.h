@@ -8,8 +8,9 @@
 namespace world_of_particles {
   class DualFissile : public Normal {
   public:
-    DualFissile(std::string, Position*, Direction*, double, double);
+    DualFissile(MultiVal*, string, Position*, Direction*, double, double);
     void draw();
+    void save();
   };
 }
 

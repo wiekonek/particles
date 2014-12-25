@@ -7,6 +7,14 @@ Direction::Direction(Direction* other) {
 }
 
 void Direction::randomize() {
-  x = (rand() % 101) / 100.0;
-  y = (rand() % 101) / 100.0;
+  x = (rand() % 101) / 10.0;
+  y = (rand() % 101) / 10.0;
+}
+
+void Direction::invert_x() {
+  x = -x;
+}
+
+void Direction::invert_y() {
+  y = -y;
 }

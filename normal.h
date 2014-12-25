@@ -8,8 +8,9 @@ namespace world_of_particles {
   protected:
     double m;
   public:
-    Normal(string, Position*, Direction*, double, double);
+    Normal(MultiVal*, string, Position*, Direction*, double, double);
     void draw();
+    void save();
     void update();
   };
 }

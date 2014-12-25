@@ -9,6 +9,8 @@ namespace world_of_particles {
     Direction() : MultiVal() {};
     Direction(double one, double two) : MultiVal(one, two) {};
     Direction(Direction* direction);
+    void invert_x();
+    void invert_y();
     void randomize();
   };
 }
