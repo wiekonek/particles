@@ -1,6 +1,24 @@
-#include <iostream>
+//normal , dual , fissile , dual_fissile  lub photonic
 
-int main(int argc, char **argv) {
-    std::cout << "Hello, world!" << std::endl;
-    return 0;
+#include <iostream>
+#include <cstdlib>
+#include <cstdio>
+#include <ctime>
+
+#include "simulator.h"
+
+#define HEIGHT 640
+#define WIDTH 480
+
+using std::cout;
+using world_of_particles::Simulator;
+
+
+int main(int argc, char* argv[]) {
+  srand( std::time( NULL ) );
+  
+  Simulator *simulator = new Simulator(WIDTH, HEIGHT, 25, 100);
+  simulator->show();
+  
+  return 0;
 }
