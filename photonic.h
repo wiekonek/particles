@@ -10,6 +10,7 @@ namespace world_of_particles {
     void draw();
     void save();
     void update();
+    void move( vector<Particle*> );
   };
 }
 #endif // PHOTONIC_H
