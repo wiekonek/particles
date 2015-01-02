@@ -24,7 +24,7 @@ namespace world_of_particles {
     int p_num, itterations;
     MultiVal *size;
     void init(auto&);
-    void go();
+    vector< vector<Particle*> > colDetector();
     void save(int);
     void show();
   public:

@@ -20,11 +20,11 @@ void Simulator::init( auto& particle ) {
   new_direction->randomize();
   double m = ( rand()%99 + 1 )  / 100.0; 				//m (0, 1)
   double r = ( rand()%99 + 1 ) / 200.0;				//r (0, 0.5)
-  
+
   switch( rand()%5 ) {
-    case 0: particle = new Normal( size, gen->genName(), new_position, new_direction, r, m );
+    case 0: particle = new Normal( size, gen->genName(), new_position, new_direction, r, m);
     break;
-    case 1: particle = new Photonic(size, gen->genName(), new_position, new_direction, r );
+    case 1: particle = new Photonic(size, gen->genName(), new_position, new_direction, r);
     break; 
     case 2: particle = new Dual( size, gen->genName(), new_position, new_direction, r, m );
     break;
@@ -73,17 +73,52 @@ void Simulator::save( int i ) {
   file.close();
 }
 
-void Simulator::go() {
-  for( int i = 1; i <= itterations; i++ ) {
-    for( auto& particle : particles )
-      particle->move( particles );
-    save( i );
-    show();
-  }
+bool colide( Particle* p1, Particle* p2 ) {
+  return ( p1->distanceTo(p2) <= p1->get_r()+p2->get_r() ) ? 1 : 0;
 }
+
+vector< vector<Particle*> > Simulator::colDetector() {
+  vector< vector<Particle*> > result;
+  vector<bool> colid( particles.size(), false );
+  int i = 0, j = 0;
+  for( Particle* p1 : particles ) {
+    j = 0;
+    for( Particle* p2 : particles ) {
+      if( i != j && colide(p1, p2) ) {
+	if( colid[i] && colid[j] ) {
+	  vector<Particle*> vec(0);
+	  vec.push_back(p1);
+	  vec.push_back(p2);
+	  result.push_back(vec);
+	} else if ( colid[i] || colid[j] ) {
+	  for(auto& line : result) {
+	    for(Particle* particle : line) {
+	     if(particle == p1)
+	       line.push_back(p2);
+	     else if(particle == p2)
+	       line.push_back(p1);
+	    }
+	  }
+	}
+	colid[i] = true;
+	colid[j] = true;
+      }
+      j++;
+    }
+    i++;
+  }
+  return result;
+}
+
 
 void Simulator::run_simulation() {
   file.open( "output.txt", std::ios::out | std::ios::trunc );
   file.close();
-  go();
+  for( int i = 1; i <= itterations; i++ ) {
+    for( auto& particle : particles )
+      particle->move( particles );
+    colDetector();
+    save( i );
+    show();
+  }
 }

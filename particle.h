@@ -27,15 +27,19 @@ namespace world_of_particles {
   public:
     Particle( MultiVal*, string, Position*, Direction*, double, double);
     virtual ~Particle();
-    virtual void draw( string );
-    virtual void save( string, double );
+    
     Position& get_position() { return *position; }
     Direction& get_direction() { return *direction; }
     double get_m() { return m; }
-    virtual void move( vector<Particle*> ) = 0;
-    virtual void save() = 0;
+    double get_r() { return r; }
+    string get_name() { return name; }
+    virtual void draw( string );
     virtual void draw() = 0;
+    virtual void save( string, double );
+    virtual void save() = 0;
+    virtual void move( vector<Particle*> ) = 0;
     virtual void update() = 0;
+    double distanceTo(Particle*);
     
   };
 }

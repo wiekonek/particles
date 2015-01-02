@@ -1,5 +1,5 @@
 #include "particle.h"
-
+#include <math.h>
 using world_of_particles::Particle;
 using world_of_particles::Position;
 using world_of_particles::Direction;
@@ -11,7 +11,7 @@ Particle::Particle(MultiVal* max, string name, Position* position, Direction* di
   this->position = new Position(position);
   this->direction = new Direction(direction);
   this->r = r;
-  this->m = 0;
+  this->m = m;
 }
 
 Particle::~Particle() {
@@ -30,5 +30,14 @@ void Particle::save(string type, double add) {
   file << name << "\t" << type << "\t" << position->get_x() << "\t" << position->get_y() << "\t" << r << "\t" << add << "\n";
   file.close();
 }
+
+double Particle::distanceTo(Particle* other) {
+  double x1 = position->get_x();
+  double y1 = position->get_y();
+  double x2 = other->position->get_x();
+  double y2 = other->position->get_y();
+  return sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
+}
+
 
 

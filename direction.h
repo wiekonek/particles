@@ -13,18 +13,13 @@ namespace world_of_particles {
     Direction(double one, double two) : MultiVal(one, two) {}
     Direction(Direction*);
     Direction(const Direction&);
-    bool operator< (const Direction&) const;
-    Direction operator+ (const Direction&) const;
-    Direction operator- (const Direction&) const;
-    Direction operator* (const Direction&) const;
-    Direction operator* (const int&) const;
+    Direction(MultiVal);
+
     void invert_x();
     void invert_y();
-    Direction* positive();
+    Direction positive() const;
     void randomize();
   };
-  
-  Direction operator- (const int&, Direction&);
 }
 
 #endif // DIRECTION_H

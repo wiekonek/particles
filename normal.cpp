@@ -1,5 +1,5 @@
 #include "normal.h"
-
+#include <iostream>
 using world_of_particles::Normal;
 using world_of_particles::Particle;
 using world_of_particles::Position;
@@ -23,13 +23,17 @@ void Normal::save() {
 }
 
 void Normal::move( vector<Particle*> particles ) {
+  cout<< "\ndir: " << direction->get_x() << " : " << direction->get_y() << "\n";
+  for( auto particle : particles ) {
+    if(particle->get_name() != name) {
+    Direction k( particle->get_position() - *position );
+    Direction maxi( std::max(Direction(2,2)-k.positive(), MultiVal(0,0)) * m * particle->get_m() * k );
+    cout<< "max: " << maxi.get_x() << " : " << maxi.get_y() << "\n";
+    *direction = *direction + (std::max(Direction(2,2)-k.positive(), MultiVal(0,0)) * m * particle->get_m() * k);
+    }
+  }  
   if( position->get_x() < 0 || position->get_x() > max->get_x() ) direction->invert_x();
   if( position->get_y() < 0 || position->get_y() > max->get_y() ) direction->invert_y();
-
-  for( auto particle : particles ) {
-    Direction k( particle->get_direction() - direction );
-    *direction = *direction + std::max( 100-*(k.positive()), Direction( 0, 0 ) ) * m * particle->get_m() * k;
-  }
   position->update(direction);
 }
 

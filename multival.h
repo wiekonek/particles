@@ -11,6 +11,13 @@ protected:
 public:
   MultiVal();
   MultiVal(double, double);
+  
+  bool operator< (const MultiVal&) const;
+  MultiVal operator+ (const MultiVal&) const;
+  MultiVal operator- (const MultiVal&) const;
+  MultiVal operator* (const MultiVal&) const;
+  MultiVal operator* (const double&) const;
+  
   double get_x();
   double get_y();
   virtual void randomize();
