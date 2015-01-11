@@ -19,14 +19,16 @@ namespace world_of_particles {
   class Simulator {
   private:
     ofstream file;
-    NameGen *gen;
-    vector<Particle*> particles;
+    vector< vector<Particle*> > collisions;
     int p_num, itterations;
     MultiVal *size;
     void init(auto&);
     vector< vector<Particle*> > colDetector();
+    void update();
     void save(int);
     void show();
+    vector<Particle*> particles;
+    NameGen *gen;
   public:
     Simulator(int, int, int, int);
     void run_simulation();

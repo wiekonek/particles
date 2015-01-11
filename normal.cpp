@@ -10,9 +10,6 @@ Normal::Normal( MultiVal* max, string name, Position* position, Direction* direc
   Particle( max, name, position, direction, r, m ) {
 }
 
-void Normal::update() {
-}
-
 void Normal::draw() {
   Particle::draw( "NORMAL" );
   std::cout << "\t" << m << "\n";
@@ -23,15 +20,15 @@ void Normal::save() {
 }
 
 void Normal::move( vector<Particle*> particles ) {
-  cout<< "\ndir: " << direction->get_x() << " : " << direction->get_y() << "\n";
-  for( auto particle : particles ) {
-    if(particle->get_name() != name) {
-    Direction k( particle->get_position() - *position );
-    Direction maxi( std::max(Direction(2,2)-k.positive(), MultiVal(0,0)) * m * particle->get_m() * k );
-    cout<< "max: " << maxi.get_x() << " : " << maxi.get_y() << "\n";
-    *direction = *direction + (std::max(Direction(2,2)-k.positive(), MultiVal(0,0)) * m * particle->get_m() * k);
-    }
-  }  
+//   cout<< "\ndir: " << direction->get_x() << " : " << direction->get_y() << "\n";
+//   for( auto particle : particles ) {
+//     if(particle->get_name() != name) {
+//     Direction k( particle->get_position() - *position );
+//     Direction maxi( std::max(Direction(2,2)-k.positive(), MultiVal(0,0)) * m * particle->get_m() * k );
+//     cout<< "max: " << maxi.get_x() << " : " << maxi.get_y() << "\n";
+//     *direction = *direction + (std::max(Direction(2,2)-k.positive(), MultiVal(0,0)) * m * particle->get_m() * k);
+//     }
+//   }  
   if( position->get_x() < 0 || position->get_x() > max->get_x() ) direction->invert_x();
   if( position->get_y() < 0 || position->get_y() > max->get_y() ) direction->invert_y();
   position->update(direction);

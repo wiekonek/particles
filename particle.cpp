@@ -39,5 +39,27 @@ double Particle::distanceTo(Particle* other) {
   return sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
 }
 
+bool Particle::collide ( Particle* other) {
+  Position *p_this = new Position(position), *p_other = new Position(other->position);
+  p_this->update(direction);
+  p_other->update(other->direction);
+}
+
+
+void Particle::updateDirection() {
+  direction->invert_x();
+  direction->invert_y();
+}
+
+
+void Particle::set_m(double m) {
+  this->m = m;
+}
+
+void Particle::set_r(double r) {
+  this->r = r;
+}
+
+
 
 

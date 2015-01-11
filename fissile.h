@@ -10,6 +10,8 @@ namespace world_of_particles {
   public:
     Fissile(MultiVal*, string, Position*, Direction*, double, double);
     void draw();
+    void updateDirectionX();
+    void updateDirectionY();
     void save();
   };
 }

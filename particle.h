@@ -33,13 +33,18 @@ namespace world_of_particles {
     double get_m() { return m; }
     double get_r() { return r; }
     string get_name() { return name; }
+    MultiVal* get_size() {return max; }
+    
     virtual void draw( string );
     virtual void draw() = 0;
     virtual void save( string, double );
     virtual void save() = 0;
     virtual void move( vector<Particle*> ) = 0;
-    virtual void update() = 0;
+    virtual void updateDirection();
+    bool collide(Particle*);
     double distanceTo(Particle*);
+    void set_r(double);
+    void set_m(double);
     
   };
 }
