@@ -25,9 +25,9 @@ namespace world_of_particles {
     bool d;
     int other;
     
-    double* new_div(double);
+    double* new_div( double, double );
   public:
-    Collision(vector<Particle*>&, NameGen*, vector<Particle*> );
+    Collision( vector<Particle*>&, NameGen*, vector<Particle*> );
     void update();
   };
 }

@@ -23,17 +23,26 @@ Collision::Collision( vector<Particle*>& particles, NameGen* gen, vector<Particl
       r += particle->get_r();
       other++;
     }
-    if( typeid ( *particle ).name() == typeid ( Dual ).name() || typeid ( *particle ).name() == typeid ( DualFissile ).name() )
+    if( d != true && typeid ( *particle ).name() == typeid ( Dual ).name() || typeid ( *particle ).name() == typeid ( DualFissile ).name() )
       d = true;
   }
   
 }
 
-double* Collision::new_div(double sum){
+double* Collision::new_div(double sum, double max){
   double *ret = new double[other];
-  for(int i = 0; i < other; i++) 
-    ret[i] = sum/other;
-
+  double add;
+  int random;
+  for( int i = 0; i < other; i++ )
+    ret[i] = 0;
+  
+  for( int i = 0; i < other*3; i++ ) { 
+    add = sum * ( (rand() % 10) / 10 );    
+    if( ret[random = rand() % other] + add < max) {
+      ret[random] += add; 
+      sum -= add;
+    }
+  }
   return ret;
 }
 
@@ -42,7 +51,7 @@ void Collision::update() {
   Position pos;
   const int num = colide_particles.size();
   int i = 0;
-  double *tr = new_div(r), *tm = new_div(m), mm;
+  double *tr = new_div(r, 0.5), *tm = new_div(m, 1), mm;
   Fissile *fis;
   cout<<tr[0]<<"\n";
 
@@ -63,7 +72,10 @@ void Collision::update() {
 	  fis = new Fissile( particle->get_size(), gen->genName(), &particle->get_position(), &particle->get_direction(), ( rand()%9 + 1 ) / 20.0, mm );
 	  fis->updateDirectionX();
 	  fis->move(particles);
+	  fis->move(particles);
+	  
 	  particle->updateDirection();
+	  particle->move(particles);
 	  particle->move(particles);
 	  
 	  particles.push_back( fis );
