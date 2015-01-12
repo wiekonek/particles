@@ -17,3 +17,11 @@ void Fissile::draw() {
 void Fissile::save() {
   Particle::save("FI", m);
 }
+
+void Fissile::updateDirectionX() {
+  direction->invert_x();
+}
+
+void Fissile::updateDirectionY() {
+  direction->invert_y();
+}

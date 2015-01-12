@@ -9,7 +9,6 @@ namespace world_of_particles {
     Normal(MultiVal*, string, Position*, Direction*, double, double);
     void draw();
     void save();
-    void update();
     void move( vector<Particle*> particles );
   };
 }

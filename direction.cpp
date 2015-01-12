@@ -25,8 +25,8 @@ Direction Direction::positive() const {
 }
 
 void Direction::randomize() {
-  x = (rand() % 101) / 100.0;
-  y = (rand() % 101) / 100.0;
+  x = (rand() % 11) / 50.0;
+  y = (rand() % 11) / 50.0;
 }
 
 void Direction::invert_x() {

@@ -7,11 +7,8 @@ using world_of_particles::Direction;
 
 Photonic::Photonic(MultiVal* max, string name, Position* position, Direction* direction, double r):
   Particle(max, name, position, direction, r, 0) {};
-  
-void Photonic::update(){
-}
 
-void Photonic::draw(){
+void Photonic::draw() {
   Particle::draw("PHOTONIC");
   std::cout<<"\n";
 }

@@ -39,5 +39,20 @@ double Particle::distanceTo(Particle* other) {
   return sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
 }
 
+void Particle::updateDirection() {
+  direction->invert_x();
+  direction->invert_y();
+}
+
+
+void Particle::set_m(double m) {
+  this->m = m;
+}
+
+void Particle::set_r(double r) {
+  this->r = r;
+}
+
+
 
 
