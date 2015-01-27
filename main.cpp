@@ -16,7 +16,7 @@ using world_of_particles::Direction;
 int main(int argc, char* argv[]) {
   srand( std::time( NULL ) );
   
-  Simulator *simulator = new Simulator(WIDTH, HEIGHT, 10, 500);
+  Simulator *simulator = new Simulator(WIDTH, HEIGHT, 10, 1000);
   simulator->run_simulation();
   
   return 0;

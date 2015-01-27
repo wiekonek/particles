@@ -20,12 +20,12 @@ void Normal::save() {
 }
 
 void Normal::move( vector<Particle*> particles ) {
-  cout<< "\ndir: " << direction->get_x() << " : " << direction->get_y() << "\n";
+  //cout<< "\ndir: " << direction->get_x() << " : " << direction->get_y() << "\n";
   for( auto particle : particles ) {
     if(particle->get_name() != name) {
     Direction k( particle->get_position() - *position );
-    Direction maxi( std::max(Direction(2,2)-k.positive(), MultiVal(0,0)) * m * particle->get_m() * k );
-    cout<< "max: " << maxi.get_x() << " : " << maxi.get_y() << "\n";
+    //Direction maxi( std::max(Direction(2,2)-k.positive(), MultiVal(0,0)) * m * particle->get_m() * k );
+    //cout<< "max: " << maxi.get_x() << " : " << maxi.get_y() << "\n";
     *direction = *direction + (std::max(Direction(2,2)-k.positive(), MultiVal(0,0)) * m * particle->get_m() * k * 0.001);
     }
   }  

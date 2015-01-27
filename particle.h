@@ -41,6 +41,7 @@ namespace world_of_particles {
     virtual void save() = 0;
     virtual void move( vector<Particle*> ) = 0;
     virtual void updateDirection();
+    virtual void updateDirection(Direction&);
     bool collide(Particle*);
     double distanceTo(Particle*);
     void set_r(double);

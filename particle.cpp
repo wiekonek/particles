@@ -51,6 +51,9 @@ void Particle::updateDirection() {
   direction->invert_y();
 }
 
+void Particle::updateDirection(Direction& dir) {
+  direction = new Direction(dir);
+}
 
 void Particle::set_m(double m) {
   this->m = m;

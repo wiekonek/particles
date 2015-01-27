@@ -36,8 +36,8 @@ double* Collision::new_div(double sum, double max){
   for( int i = 0; i < other; i++ )
     ret[i] = 0;
   
-  for( int i = 0; i < other*3; i++ ) { 
-    add = sum * ( (rand() % 10) / 10 );    
+  for( int i = 0; i < other*30; i++ ) { 
+    add = sum * ( (rand() % 100) / 100.0 );  
     if( ret[random = rand() % other] + add < max) {
       ret[random] += add; 
       sum -= add;
@@ -47,21 +47,26 @@ double* Collision::new_div(double sum, double max){
 }
 
 void Collision::update() {
-  Direction dir;
-  Position pos;
+
   const int num = colide_particles.size();
   int i = 0;
   double *tr = new_div(r, 0.5), *tm = new_div(m, 1), mm;
-  Fissile *fis;
-  cout<<tr[0]<<"\n";
-
+  Particle *part;
+  Direction *dir = new Direction(colide_particles[0]->get_direction());
   for(Particle* particle : colide_particles) {
     if( typeid ( *particle ) == typeid ( Photonic ) ) {
       particle->updateDirection();
     }else {
       if(other > 1) {
-	particle->updateDirection();
+	
 	particle->set_m(tm[i]);
+
+	if( i < num-1 && typeid ( colide_particles[i+1] ) != typeid ( Photonic ) ) {
+	  particle->updateDirection(*(new Direction(colide_particles[i+1]->get_direction())) );
+	} else if( i == num-1 && typeid ( colide_particles[0] ) != typeid ( Photonic ) ){
+	  particle->updateDirection(*dir);
+	}
+	particle->move(particles);
 	if(d)
 	 particle->set_r(tr[i]);
 	
@@ -69,26 +74,24 @@ void Collision::update() {
 	  mm = particle->get_m()/2;
 	  particle->set_m(mm);
 	  particle->set_r(( rand()%9 + 1 ) / 20.0);
-	  fis = new Fissile( particle->get_size(), gen->genName(), &particle->get_position(), &particle->get_direction(), ( rand()%9 + 1 ) / 20.0, mm );
-	  fis->updateDirectionX();
-	  fis->move(particles);
-	  fis->move(particles);
+	  part = new Normal( particle->get_size(), gen->genName(), &particle->get_position(), &particle->get_direction(), ( rand()%9 + 1 ) / 20.0, mm );
+
 	  
 	  particle->updateDirection();
-	  particle->move(particles);
-	  particle->move(particles);
+
 	  
-	  particles.push_back( fis );
+	  particles.push_back( part );
 	}
       }
-      i++;
+      
     }
+    i++;
   }
   
   delete tm;
   
   for(auto itt = particles.begin(); itt < particles.end(); itt++) {
-    if( typeid(*(*itt)) != typeid(Photonic) && (*itt)->get_m() < 0.1) {
+    if( typeid(*(*itt)) != typeid(Photonic) && (*itt)->get_m() < 0.01) {
       particles.erase(itt);
     }
     
